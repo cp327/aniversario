@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TE AMO❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe8f5 50%, #fff0f8 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animación de entrada - Corazón que explota */
+        #flower-intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa6c9 50%, #ffd4e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOutIntro 1s ease 7.5s forwards;
+        }
+
+        .heart-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .big-heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10rem;
+            animation: heartBeat 2s ease-in-out 0.5s 3, heartExplode 0.8s ease-out 6.5s forwards;
+            filter: drop-shadow(0 10px 30px rgba(255, 0, 100, 0.4));
+        }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            25% {
+                transform: translate(-50%, -50%) scale(1.15);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            75% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        @keyframes heartExplode {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        /* Flores que salen del corazón */
+        .exploding-flower {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: flowerExplode 2s ease-out forwards;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+        }
+
+        @keyframes flowerExplode {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.8;
+                transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--rotate));
+            }
+        }
+
+        /* Posiciones aleatorias para las flores */
+        .exploding-flower:nth-child(2) { 
+            --tx: -200px; 
+            --ty: -150px; 
+            --rotate: -45deg;
+            animation-delay: 3s;
+        }
+        .exploding-flower:nth-child(3) { 
+            --tx: 180px; 
+            --ty: -180px; 
+            --rotate: 30deg;
+            animation-delay: 3.1s;
+        }
+        .exploding-flower:nth-child(4) { 
+            --tx: -250px; 
+            --ty: 100px; 
+            --rotate: -60deg;
+            animation-delay: 3.2s;
+        }
+        .exploding-flower:nth-child(5) { 
+            --tx: 220px; 
+            --ty: 120px; 
+            --rotate: 45deg;
+            animation-delay: 3.3s;
+        }
+        .exploding-flower:nth-child(6) { 
+            --tx: 0px; 
+            --ty: -220px; 
+            --rotate: 0deg;
+            animation-delay: 3.4s;
+        }
+        .exploding-flower:nth-child(7) { 
+            --tx: -150px; 
+            --ty: -80px; 
+            --rotate: -30deg;
+            animation-delay: 3.5s;
+        }
+        .exploding-flower:nth-child(8) { 
+            --tx: 150px; 
+            --ty: -50px; 
+            --rotate: 60deg;
+            animation-delay: 3.6s;
+        }
+        .exploding-flower:nth-child(9) { 
+            --tx: -100px; 
+            --ty: 180px; 
+            --rotate: -90deg;
+            animation-delay: 3.7s;
+        }
+        .exploding-flower:nth-child(10) { 
+            --tx: 100px; 
+            --ty: 200px; 
+            --rotate: 90deg;
+            animation-delay: 3.8s;
+        }
+        .exploding-flower:nth-child(11) { 
+            --tx: 0px; 
+            --ty: 230px; 
+            --rotate: 15deg;
+            animation-delay: 3.9s;
+        }
+        .exploding-flower:nth-child(12) { 
+            --tx: -280px; 
+            --ty: -50px; 
+            --rotate: -75deg;
+            animation-delay: 4s;
+        }
+        .exploding-flower:nth-child(13) { 
+            --tx: 270px; 
+            --ty: 0px; 
+            --rotate: 75deg;
+            animation-delay: 4.1s;
+        }
+
+        /* Pétalos cayendo */
+        .falling-petal {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            animation: petalFall 3s ease-in forwards;
+        }
+
+        @keyframes petalFall {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px) rotate(0deg);
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(var(--fall-rotate));
+            }
+        }
+
+        .falling-petal:nth-child(14) { left: 10%; animation-delay: 4.2s; --fall-rotate: 360deg; }
+        .falling-petal:nth-child(15) { left: 25%; animation-delay: 4.3s; --fall-rotate: -360deg; }
+        .falling-petal:nth-child(16) { left: 40%; animation-delay: 4.4s; --fall-rotate: 270deg; }
+        .falling-petal:nth-child(17) { left: 55%; animation-delay: 4.5s; --fall-rotate: -270deg; }
+        .falling-petal:nth-child(18) { left: 70%; animation-delay: 4.6s; --fall-rotate: 180deg; }
+        .falling-petal:nth-child(19) { left: 85%; animation-delay: 4.7s; --fall-rotate: -180deg; }
+        .falling-petal:nth-child(20) { left: 15%; animation-delay: 4.8s; --fall-rotate: 450deg; }
+        .falling-petal:nth-child(21) { left: 60%; animation-delay: 4.9s; --fall-rotate: -450deg; }
+
+        .intro-text {
+            position: absolute;
+            bottom: 80px;
+            width: 100%;
+            text-align: center;
+            font-size: 3rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            opacity: 0;
+            font-family: 'Great Vibes', cursive;
+            font-weight: 400;
+            animation: fadeInText 0.5s ease 5s forwards;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        @keyframes fadeInText {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .intro-text span {
+            display: inline-block;
+            opacity: 0;
+            animation: typewriter 0.1s ease forwards;
+        }
+
+        @keyframes typewriter {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Delays para cada letra */
+        .intro-text span:nth-child(1) { animation-delay: 5s; }
+        .intro-text span:nth-child(2) { animation-delay: 5.1s; }
+        .intro-text span:nth-child(3) { animation-delay: 5.2s }
+        .intro-text span:nth-child(4) { animation-delay: 5.3s; }
+        .intro-text span:nth-child(5) { animation-delay: 5.4s; }
+        .intro-text span:nth-child(6) { animation-delay: 5.5s; }
+        .intro-text span:nth-child(7) { animation-delay: 5.6s; }
+        .intro-text span:nth-child(8) { animation-delay: 5.7s; }
+        .intro-text span:nth-child(9) { animation-delay: 5.8s; }
+        .intro-text span:nth-child(10) { animation-delay: 5.9s; }
+        .intro-text span:nth-child(11) { animation-delay: 6s; }
+        .intro-text span:nth-child(12) { animation-delay: 6.1s; }
+        .intro-text span:nth-child(13) { animation-delay: 6.2s; }
+        .intro-text span:nth-child(14) { animation-delay: 6.3s; }
+        .intro-text span:nth-child(15) { animation-delay: 6.4s; }
+        .intro-text span:nth-child(16) { animation-delay: 6.5s; }
+        .intro-text span:nth-child(17) { animation-delay: 6.6s; }
+        .intro-text span:nth-child(18) { animation-delay: 6.7s; }
+        .intro-text span:nth-child(19) { animation-delay: 6.8s; }
+        .intro-text span:nth-child(20) { animation-delay: 6.9s; }
+
+        @keyframes fadeOutIntro {
+            to {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
+        #main-content {
+            opacity: 0;
+            animation: fadeInContent 1s ease 8s forwards;
+        }
+
+        @keyframes fadeInContent {
+            to { opacity: 1; }
+        }
+
+        /* Flores decorativas flotantes */
+        .flower {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .flower:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .flower:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
+        .flower:nth-child(3) { bottom: 15%; left: 8%; animation-delay: 2s; }
+        .flower:nth-child(4) { top: 60%; right: 5%; animation-delay: 3s; }
+        .flower:nth-child(5) { bottom: 25%; right: 15%; animation-delay: 1.5s; }
+        .flower:nth-child(6) { top: 40%; left: 15%; animation-delay: 2.5s; }
+        .flower:nth-child(7) { top: 70%; right: 20%; animation-delay: 0.5s; }
+        .flower:nth-child(8) { bottom: 40%; left: 20%; animation-delay: 3.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Corazones flotantes */
+        .heart {
+            position: fixed;
+            font-size: 1.5rem;
+            opacity: 0.2;
+            animation: floatHeart 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart:nth-child(9) { top: 30%; left: 10%; animation-delay: 1s; }
+        .heart:nth-child(10) { top: 50%; right: 12%; animation-delay: 2s; }
+        .heart:nth-child(11) { bottom: 30%; left: 18%; animation-delay: 0.5s; }
+        .heart:nth-child(12) { top: 80%; right: 8%; animation-delay: 3s; }
+
+        @keyframes floatHeart {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+                opacity: 0.2;
+            }
+            50% { 
+                transform: translateY(-30px) scale(1.2);
+                opacity: 0.4;
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #d63384;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-family: 'Great Vibes', cursive;
+            font-weight: 400;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .snoopy-section {
+            text-align: center;
+            margin: 30px 0;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .snoopy-img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            animation: bounce 2s ease infinite;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .snoopy-caption {
+            color: #666;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .letter-container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px 0;
+            box-shadow: 0 10px 40px rgba(214, 51, 132, 0.2);
+            animation: fadeInUp 1s ease;
+            position: relative;
+            border: 3px solid #ffe8f5;
+        }
+
+        .letter-container::before {
+            content: '🐱';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.5rem;
+            opacity: 0.5;
+        }
+
+        .letter-container::after {
+            content: '💕';
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        .letter-text {
+            line-height: 1.8;
+            color: #333;
+            font-size: 1.15rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .letter-text p {
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            font-style: italic;
+            color: #d63384;
+            font-size: 1.5rem;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .photos-section {
+            margin: 60px 0;
+        }
+
+        .photos-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #d63384;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-family: 'Great Vibes', cursive;
+            font-weight: 400;
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .photo-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 1s ease backwards;
+            border: 2px solid #fff0f8;
+        }
+
+        .photo-card:nth-child(1) { animation-delay: 0.2s; }
+        .photo-card:nth-child(2) { animation-delay: 0.4s; }
+        .photo-card:nth-child(3) { animation-delay: 0.6s; }
+        .photo-card:nth-child(4) { animation-delay: 0.8s; }
+
+        .photo-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(214, 51, 132, 0.3);
+        }
+
+        .photo-frame {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #f8f8f8;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .photo-caption {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* Decoraciones extras */
+        .decoration {
+            position: absolute;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .cat-decoration {
+            font-size: 3rem;
+            top: 100px;
+            right: 50px;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .butterfly {
+            font-size: 2rem;
+            top: 200px;
+            left: 100px;
+            animation: flutter 4s ease-in-out infinite;
+        }
+
+        @keyframes flutter {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% { 
+                transform: translate(20px, -20px) rotate(10deg);
+            }
+            75% { 
+                transform: translate(-20px, 20px) rotate(-10deg);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #d63384;
+            font-size: 2rem;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .letter-container { padding: 30px 20px; }
+            .photos-grid { grid-template-columns: 1fr; }
+            .snoopy-img { width: 150px; height: 150px; }
+            .big-heart { font-size: 6rem; }
+            .exploding-flower { font-size: 2rem; }
+            .intro-text { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animación de entrada - Corazón que explota en flores -->
+    <div id="flower-intro">
+        <div class="heart-container">
+            <!-- Corazón principal que late -->
+            <div class="big-heart">❤️</div>
+            
+            <!-- Flores que explotan del corazón -->
+            <div class="exploding-flower">🌹</div>
+            <div class="exploding-flower">🌺</div>
+            <div class="exploding-flower">🌷</div>
+            <div class="exploding-flower">🌸</div>
+            <div class="exploding-flower">🌼</div>
+            <div class="exploding-flower">💐</div>
+            <div class="exploding-flower">🏵️</div>
+            <div class="exploding-flower">🌻</div>
+            <div class="exploding-flower">🌹</div>
+            <div class="exploding-flower">💮</div>
+            <div class="exploding-flower">🌺</div>
+            <div class="exploding-flower">🌷</div>
+            
+            <!-- Pétalos cayendo -->
+            <div class="falling-petal">🌸</div>
+            <div class="falling-petal">🌺</div>
+            <div class="falling-petal">🌼</div>
+            <div class="falling-petal">🌷</div>
+            <div class="falling-petal">🌹</div>
+            <div class="falling-petal">💮</div>
+            <div class="falling-petal">🌸</div>
+            <div class="falling-petal">🏵️</div>
+        </div>
+        
+        <div class="intro-text">
+            <span>P</span><span>a</span><span>r</span><span>a</span><span> </span><span>t</span><span>i</span><span>, </span><span> </span><span>m</span><span>i</span><span> </span><span>a</span><span>m</span><span>o</span><span>r</span><span> </span><span>💕</span>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div id="main-content">
+        <!-- Flores decorativas -->
+        <div class="flower">🌸</div>
+        <div class="flower">🌺</div>
+        <div class="flower">🌷</div>
+        <div class="flower">🌹</div>
+        <div class="flower">🌼</div>
+        <div class="flower">🏵️</div>
+        <div class="flower">🌻</div>
+        <div class="flower">💮</div>
+
+        <!-- Corazones -->
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+        <div class="heart">💗</div>
+        <div class="heart">💝</div>
+
+        <!-- Decoraciones adicionales -->
+        <div class="decoration cat-decoration">🐱</div>
+        <div class="decoration butterfly">🦋</div>
+
+        <div class="container">
+            <header>
+                <h1>¡Feliz Primer Aniversario! 💕</h1>
+                <p class="subtitle">365 días de amor y felicidad</p>
+            </header>
+
+            <div class="snoopy-section">
+                <img src="snoopy.png" alt="Snoopy" class="snoopy-img">
+                <p class="snoopy-caption">Con todo mi amor</p>
+            </div>
+
+            <div class="letter-container">
+                <div class="letter-text">
+                    <p>Mi amor,</p>
+                    
+                    <p>Hoy se cumple un año desde que comenzamos esta hermosa aventura juntos y no puedo creer lo rápido que ha pasado el tiempo. Cada día a tu lado ha sido un regalo que atesoro profundamente en mi corazón.</p>
+                    
+                    <p>Quiero que sepas que me siento increíblemente afortunado de tenerte en mi vida. Contigo he descubierto lo que significa sentirse completo, en paz y verdaderamente feliz. Tu risa ilumina mis días más oscuros, tu abrazo es mi refugio favorito y tu amor es lo que me motiva a ser mejor persona cada día.</p>
+                    
+                    <p>Amo la forma en que me haces sonreír sin esfuerzo, cómo entiendes mis silencios y cómo celebras mis alegrías como si fueran tuyas. Me encanta despertar sabiendo que eres parte de mi vida y me emociona pensar en todos los momentos que aún nos quedan por vivir juntos.</p>
+
+                    <p>Has llenado mi vida de color, de risas, de ternura y de un amor tan grande que a veces no encuentro palabras suficientes para expresarlo. Pero hoy quiero intentarlo: "te amo con todo mi ser, con cada latido de mi corazón y con cada pensamiento que cruza mi mente."</p>
+
+                    <p>Este es solo el primero de muchos aniversarios que quiero celebrar a tu lado. Quiero seguir construyendo nuestra historia, seguir creciendo juntos, seguir amándonos con la misma intensidad de este primer año o incluso más.</p>
+                    
+                    <p>Gracias por elegirme, por amarme tal como soy, por tu paciencia, tu cariño y por hacer de cada día una experiencia maravillosa. Eres y serás siempre mi persona favorita.</p>
+                    
+                    <p>Te amo hoy, te amaré mañana, y te amaré por siempre.</p>
+                    
+                    <div class="signature">
+                        Con todo mi amor, siempre tuyo 💕
+                    </div>
+                </div>
+            </div>
+
+            <div class="photos-section">
+                <h2 class="photos-title">Nuestros Momentos</h2>
+                
+                <div class="photos-grid">
+                    <div class="photo-card">
+                        <div class="photo-frame">
+                            <img src="foto1.jpeg" alt="Nuestra foto 1">
+                        </div>
+                        <p class="photo-caption">Nuestro primer día juntos, el inicio de todo lo hermoso que vivimos hoy</p>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-frame">
+                            <img src="foto2.jpeg" alt="Nuestra foto 2">
+                        </div>
+                        <p class="photo-caption">Esa sonrisa tuya que me enamora cada día más</p>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-frame">
+                            <img src="foto3.jpeg" alt="Nuestra foto 3">
+                        </div>
+                        <p class="photo-caption">Juntos creando recuerdos inolvidables</p>
+                    </div>
+
+                    <div class="photo-card">
+                        <div class="photo-frame">
+                            <img src="foto4.jpeg" alt="Nuestra foto 4">
+                        </div>
+                        <p class="photo-caption">Simplemente nosotros, siendo felices en nuestra burbuja de amor</p>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                💕 Te amo infinitamente 💕
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
